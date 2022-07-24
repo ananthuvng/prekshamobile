@@ -1,22 +1,38 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:openvpn_flutter/openvpn_flutter.dart';
+import 'package:openvpn_flutter_example/home.dart';
+import 'package:date_field/date_field.dart';
+import 'package:checkmark/checkmark.dart';
+import 'package:openvpn_flutter_example/sc1.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Screen1(),
+      ),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class First extends StatefulWidget {
+  const First({Key? key}) : super(key: key);
+
+  @override
+  State<First> createState() => _FirstState();
+}
+
+class _FirstState extends State<First> {
   late OpenVPN engine;
   VpnStatus? status;
   VPNStage? stage;
@@ -66,42 +82,175 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          backgroundColor: Colors.white,
+          shadowColor: Colors.transparent,
+          centerTitle: true,
         ),
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(stage?.toString() ?? VPNStage.disconnected.toString()),
-              Text(status?.toJson().toString() ?? ""),
-              TextButton(
-                child: const Text("Start"),
-                onPressed: () {
-                  initPlatformState();
-                },
+        body: Column(
+          children: [
+            Container(
+              height: 200,
+              child: Image(
+                image: AssetImage("images/logo.png"),
               ),
-              TextButton(
-                child: const Text("STOP"),
-                onPressed: () {
-                  engine.disconnect();
-                },
+            ),
+            Text(
+              'PREKSHA',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * .5,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    child: Text(
+                      'Preksha app is to provide you complete anonymity over your report. We make sure of that your personal information is not being tracked by anyone.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    child: Text(
+                      'We are not collecting any kind of personal info and your ip address is being secured using VPN.A VPN is an intermediary server that encrypts your connection to the internet and it also hides your IP address.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+
+                  ///      Text(stage?.toString() ?? VPNStage.disconnected.toString()),
+                  //     Text(status?.toJson().toString() ?? ""),
+                  GestureDetector(
+                    onTap: () async {
+                      initPlatformState();
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 49, 85, 179),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                          child: Text(
+                        'Go Aonymous',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    child: Text(
+                      'Make sure you press Go anonyous before starting reproting',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+
+                  ///      Text(stage?.toString() ?? VPNStage.disconnected.toString()),
+                  //     Text(status?.toJson().toString() ?? ""),
+                  GestureDetector(
+                    onTap: () async {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Formre()));
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 49, 85, 179),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                          child: Text(
+                        'Report',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                    ),
+                  ),
+
+                  /*  TextButton(
+                    child: const Text("report"),
+                    onPressed: () {},
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Formre()));
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 49, 85, 179),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                          child: Text(
+                        'Next',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                    ),
+                  ),
+                  TextButton(
+                    child: const Text("STOP"),
+                    onPressed: () {
+                      engine.disconnect();
+                    },
+                  ),
+                  if (Platform.isAndroid)
+                    TextButton(
+                      child: Text(_granted ? "Granted" : "Request Permission"),
+                      onPressed: () {
+                        engine.requestPermissionAndroid().then((value) {
+                          setState(() {
+                            _granted = value;
+                          });
+                        });
+                      },
+                    ),*/
+                ],
               ),
-              if (Platform.isAndroid)
-                TextButton(
-                  child: Text(_granted ? "Granted" : "Request Permission"),
-                  onPressed: () {
-                    engine.requestPermissionAndroid().then((value) {
-                      setState(() {
-                        _granted = value;
-                      });
-                    });
-                  },
-                ),
-            ],
-          ),
+            ),
+          ],
         ),
+        backgroundColor: Colors.white,
       ),
     );
   }

@@ -11,11 +11,21 @@ dependencies:
   openvpn_flutter: 
     path: ../ 
   cupertino_icons: ^1.0.2
+  date_field: ^3.0.1
+  checkmark: ^0.0.2+1
+  http: ^0.13.4
+  google_maps_flutter: ^2.1.9
+  map_picker: ^0.0.3
+  geocoding: ^2.0.4
+  flutter_svg: ^1.1.1+1
+  google_place_picker: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter 
   flutter_lints: ^1.0.0
- 
+  
 flutter: 
-  uses-material-design: true 
+  uses-material-design: true
+  assets:
+   - images/  
